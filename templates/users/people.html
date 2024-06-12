@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="display-1">People</h1>
+<p class="lead">Know the people around you better!</p>
+<hr>
+<ul style="list-style-type:none; padding-left:10px; padding-right:10px">
+    {% for object in users %}
+    <li>
+        <blockquote class="blockquote">
+            <a class="h2" style="font-family: rockwell;" href="{% url 'NamedProfile' object.id %}">{{ object.username }}</a>
+            <!-- <p class="mb-0">{{ object.bio }}</p> -->
+            <p class="lead">Email: {{ object.email }}</p>
+        <!--    <footer class="blockquote-footer">posted by <cite title="{{ object.author }}"><a href="#">{{ object.author }}</a></cite> on <cite title="{{ object.date_posted }}">{{ object.date_posted|date:"M j, o" }}</cite></footer>-->
+        </blockquote>
+        <hr>
+    </li>
+    {% endfor %}
+</ul>
+<!--<blockquote>-->
+<!--    <h1 class="display-4">What do we offer</h1>-->
+<!--    <p class="h5" style="line-height: 1.5em;">The TechBlog™ community offers a platform for group work and online chat to all and allow our members to share <em>text, images, videos, codes, projects and even more...</em> with any other member.</p>-->
+<!--</blockquote>-->
+<!--<hr>-->
+<br>
+{% endblock %}

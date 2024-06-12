@@ -1,0 +1,12 @@
+{% extends 'base2.html' %}
+{% block content %}
+
+  {% load markdown_extras %}
+    <br>
+    <blockquote class="blockquote">
+        <h2 class="h2" style="font-family: rockwell;">{{ object.title | markdown | safe }}</h2>
+        <p class="mb-0">{{ object.content | markdown | safe }}</p>
+        <footer class="blockquote-footer">posted by <cite title="{{ object.author }}"><a href="{% url 'NamedProfile' blog.author.id %}">{{ object.author }}</a></cite> on <cite title="{{ object.date_posted }}">{{ object.date_posted|date:"M j, o" }}</cite></footer>
+    </blockquote>
+    <hr style="margin-bottom: 20px">
+{% endblock %}

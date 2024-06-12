@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-{{message.tags}}">{{ message }}</div>
+{% endfor %}
+{% endif %}
+<div class="container mt-5">
+    <div class="card mb-4">
+        <div class="card-header h5">
+            You have been Logged Out
+        </div>
+        <div class="card-body">
+            Hope you enjoyed Today!
+            
+        </div>
+        <div class="card-footer">                
+            <small class="text-muted">
+                Go to <a href="{% url 'Home' %}" class="link">Home</a> or <a href="{% url 'Login' %}" class="link" type="submit"> Log in </a> Again?
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock %}

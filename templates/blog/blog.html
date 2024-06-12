@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+        <h1 class="display-3" style="font-family: rockwell;"><strong>TechBlog</strong></h1>
+        <h4 class="lead"><strong>We provide a platform for people who want to help others.</strong></h4>
+        <hr>
+        <br>
+        <ul style="margin-bottom: 100px">
+            {% for blog in blog %}
+<!--            <li>-->
+<!--                <h2>{{ blog.title }}</h2>-->
+<!--                <p>{{ blog.content }}</p>-->
+<!--                <hr>-->
+<!--            </li>-->
+            <blockquote class="blockquote">
+                <a href="{% url 'Blog' blog.id %}" class="h2" style="font-family: rockwell; color:rgb(0, 92, 167);">{{ blog.title }}</a>
+                <p class="mb-0">{{ blog.content }}</p>
+                <footer class="blockquote-footer">posted by <cite title="{{ blog.author }}"><a href="{% url 'NamedProfile' blog.author.id %}">{{ blog.author }}</a></cite> on <cite title="{{ blog.date_posted }}">{{ blog.date_posted|date:"M j, o" }}</cite></footer>
+            </blockquote>
+            <hr>
+<!--            <li class="media">-->
+<!--                <img src="..." class="mr-3" alt="...">-->
+<!--                <div class="media-body">-->
+<!--                    <h5 class="mt-0 mb-1">{{ blog.title }}</h5>-->
+<!--                    {{ blog.content }}-->
+<!--                </div>-->
+<!--            </li>-->
+<!--            <hr>-->
+<!--            <br>-->
+<!--            <div class="card">-->
+<!--                <div class="card-header">-->
+<!--                    {{ blog.author }}-->
+<!--                </div>-->
+<!--                <div class="card-body">-->
+<!--                    <h5 class="card-title">{{ blog.title }}</h5>-->
+<!--                    <p class="card-text">{{ blog.content }}</p>-->
+<!--                    <a href="#" class="btn btn-primary">Read More</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <br>-->
+            {% endfor %}
+        </ul>
+{% endblock %}

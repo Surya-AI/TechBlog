@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load markdown_extras %}
+<!-- Main Content -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-8">
+
+      <!-- Feed -->
+      <div class="card">
+        <div class="card-header">
+          Latest Posts
+        </div>
+        <div class="card-body">
+          {% for post in posts %}
+          <!-- Posts will be dynamically added here -->
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">{{ post.author.username }} <a href="{% url 'NamedProfile' post.author.id %}" class="link text-secondary lead">@{{ post.author.id }}</a></h5>
+              <p class="card-text">{{ post.content | markdown | safe }}</p>
+            </div>
+          </div>
+          <!-- End of Posts -->
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-lg-4">
+      <div class="card mb-4">
+        <div class="card-header">
+          Trending Topics
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            {% for topic in topics %}
+            <li class="list-group-item">{{ topic }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    {% if user.is_authenticated %}
+    <form action="{% url 'Post Create' %}" method="get">
+      {% csrf_token %}
+      <button href="#" class="btn btn-outline-dark btn-floating" type="submit" style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 40px;">Post</button>
+    </form>
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock %}

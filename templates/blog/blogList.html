@@ -1,0 +1,32 @@
+{% extends 'base2.html' %}
+{% block content %}
+
+  {% load markdown_extras %}
+
+  <div style="">
+    <h1 class="h1">We Blog</h1>
+    <p class="lead">We connect your brains!</p>
+    <hr class="my-4" />
+  </div>
+    <ul class="list-unstyled">
+      {% for post in blogs %}
+      <div class="jumbotron" id="jumbotron" style="background-color: #ffffff60;">
+        <li class="media">
+          <article class="media content-section">
+            <div class="media-body">
+              <div class="article-metadata">
+                <a class="mr-2" href="{% url 'NamedProfile' post.author.id %}">{{ post.author }}</a>
+                <small class="text-muted">{{ post.data_posted|date:"M j, Y" }}</small>
+                <br>
+              </div>
+              <a class="article-title" style="font-size: 40px;" href="{% url 'Blog' post.id %}">{{ post.title | markdown | safe }}</a>
+              <hr class="my-4" />
+              <p class="article-content">{{ post.content | markdown | safe }}</p>
+            </div>
+          </article>
+        </li>
+      </div>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

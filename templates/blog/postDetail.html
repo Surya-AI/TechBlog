@@ -1,0 +1,18 @@
+{% extends 'base2.html' %}
+{% block content %}
+
+  {% load markdown_extras %}
+    <br>
+    <blockquote class="blockquote">
+        <p class="mb-0">{{ object.content | markdown | safe }}</p>
+        <footer class="blockquote-footer">posted by <cite title="{{ object.author }}"><a href="{% url 'NamedProfile' blog.author.id %}">{{ object.author }}</a></cite> on <cite title="{{ object.date_posted }}">{{ object.date_posted|date:"M j, o" }}</cite></footer>
+    </blockquote>
+    <hr style="margin-bottom: 20px">
+    {% for comment in object.comments %}    
+    <blockquote class="blockquote" style="margin-left: 10px;">
+        <p class="mb-1">{{ comment.content | markdown | safe }}</p>
+        <footer class="blockquote-footer">posted by <cite title="{{ comment.author }}"><a href="{% url 'NamedProfile' comment.author.id %}">{{ comment.author }}</a></cite> on <cite title="{{ comment.date_posted }}">{{ comment.date_posted|date:"M j, o" }}</cite></footer>
+    </blockquote>
+    <hr style="margin-bottom: 10px; margin-left: 10px;">
+    {% endfor %}
+{% endblock %}

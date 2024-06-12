@@ -1,0 +1,65 @@
+
+
+{% extends 'base.html' %}
+{% block content %}
+
+  {% load markdown_extras %}
+  <!-- Main Content -->
+  <div class="container mt-5">
+    <div class="row">
+      <!-- Mainbar -->
+      <div class="col-lg-8">
+        <div class="card-body">
+          <div class="card">
+            <div class="card-header">
+              Latest Posts
+            </div>
+            <div class="card-body">
+            {% for post in posts %}
+            {% if post.author == profileUser %}
+              <!-- Posts will be dynamically added here -->
+                <div class="card mb-3 userPost">
+                <div class="card-body">
+                  <h5 class="card-title">{{ post.author.username }} <a href="#" class="link text-secondary lead" style="text-decoration: none;">@{{ post.author.id }}</a></h5>
+                  <p class="card-text">{{ post.content | markdown | safe }}</p>
+
+                </div>
+              </div>
+              <!-- End of Posts -->
+            {% endif %}
+            {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="row" style="padding-bottom: 20px;">
+            <div class="col-md-4 text-center">
+              <img src="https://cdn.pixabay.com/photo/2017/06/13/12/54/profile-2398783_1280.png" alt="Profile Image" class="profile-image">
+            </div>
+            <div class="col-md-8">
+              <h2 class="mt-3" style="margin-bottom: 0px;">{{ profileUser.username }}</h2>
+              <p class="text-secondary lead" style="margin-bottom: 0px;">@{{ profileUser.id }}</p>
+              <p>Date Joined: Jan 1, 2022</p>
+              {% if profileUser == user %}
+              <a href="#" class="link">Edit Profile</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% if user.is_authenticated %}
+      <form action="{% url 'Post Create' %}" method="get">
+        {% csrf_token %}
+        <button href="#" class="btn btn-outline-dark btn-floating" type="submit" style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 40px;">Post</button>
+      </form>
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}
